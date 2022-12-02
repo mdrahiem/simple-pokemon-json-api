@@ -4,20 +4,20 @@ require("dotenv").config();
 
 const express = require("express");
 const pack = require("../package.json");
-const router = require("./routes");
+const router = require("./api");
 const cors = require("cors");
 const fs = require("fs");
 const logic = require("./logic");
 
 const {
-  env: { PORT, BASE_URL }
+  env: { PORT, BASE_URL },
 } = process;
 
 var file = __dirname + "/../data/pokemon.json";
 const pokemonsFile = fs.readFileSync(file, "utf8");
 const pokemons = JSON.parse(pokemonsFile);
-pokemons.forEach(pokemon => {
-  pokemon.variations.forEach(variation => {
+pokemons.forEach((pokemon) => {
+  pokemon.variations.forEach((variation) => {
     variation.image = BASE_URL + variation.image;
   });
 });
